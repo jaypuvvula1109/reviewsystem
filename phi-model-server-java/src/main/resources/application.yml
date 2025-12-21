@@ -1,0 +1,26 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.r2dbc.R2dbcDataAutoConfiguration
+
+server:
+  port: 8080
+
+model:
+  path: ${MODEL_PATH:/app/models/phi-3-mini-4k-instruct-q4.gguf}
+  threads: ${N_THREADS:4}
+  context-size: ${N_CTX:2048}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.example.phi: INFO

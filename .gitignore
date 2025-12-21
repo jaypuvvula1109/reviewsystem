@@ -1,0 +1,45 @@
+# Maven / build
+/target/
+/.mvn/wrapper/maven-wrapper.jar
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+*.tmp
+
+# Model binaries and large files
+# Ignore common model binary extensions and the models/ folder
+/models/
+*.gguf
+*.safetensors
+*.pt
+*.bin
+*.ckpt
+
+# Spring Boot repackaged layout
+/BOOT-INF/
+
+# Environment / local overrides
+.env
+.env.*

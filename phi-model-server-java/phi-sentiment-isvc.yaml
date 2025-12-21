@@ -1,0 +1,45 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: phi-sentiment
+  namespace: default
+  annotations:
+    serving.kserve.io/disable-sidecar-injection: "true"
+spec:
+  predictor:
+    containers:
+      - name: kserve-container
+        image: phi-sentiment-java:v1
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        env:
+          - name: MODEL_PATH
+            value: "/app/models/phi-3-mini-4k-instruct-q4.gguf"
+          - name: N_CTX
+            value: "2048"
+          - name: N_THREADS
+            value: "4"
+          - name: JAVA_OPTS
+            value: "-Xmx3g -Xms1g"
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2"
+          limits:
+            memory: "5Gi"
+            cpu: "4"
+        readinessProbe:
+          httpGet:
+            path: /v1/models/phi-sentiment/ready
+            port: 8080
+          initialDelaySeconds: 90
+          periodSeconds: 10
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 15
