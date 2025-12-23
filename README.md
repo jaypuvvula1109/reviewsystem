@@ -44,3 +44,31 @@ kubectl patch configmap/inferenceservice-config -n kserve --type=merge \
 # 5. Verify
 kubectl get pods -n cert-manager
 kubectl get pods -n kserve
+
+curl -X POST http://localhost:8081/reviews \
+  -H "Content-Type: application/json" \
+  -d '{
+    "productId": "PROD-001",
+    "userId": "USER-123",
+    "rating": 5,
+    "title": "Excellent Product!",
+    "content": "This product exceeded my expectations. Fast shipping and great quality. Highly recommend!"
+  }'
+
+
+  {
+  "id": "6761a2b3c4d5e6f7a8b9c0d1",
+  "productId": "PROD-001",
+  "userId": "USER-123",
+  "rating": 5,
+  "title": "Excellent Product!",
+  "content": "This product exceeded my expectations. Fast shipping and great quality. Highly recommend!",
+  "sentiment": {
+    "sentiment": "positive",
+    "score": 0.95,
+    "confidence": 0.9,
+    "categories": ["product_quality", "shipping"],
+    "summary": "Customer highly satisfied with product and delivery."
+  },
+  "createdAt": "2024-12-22T10:30:00Z"
+}
