@@ -1,0 +1,15 @@
+# Maven target
+/target/
+
+# Model binaries and large files
+# Ignore common model binary extensions and the models/ folder
+/models/
+*.gguf
+*.safetensors
+*.pt
+*.bin
+*.ckpt
+
+# IDE
+.idea/
+.vscode/

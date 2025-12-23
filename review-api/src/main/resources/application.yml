@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: review-api
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/reviewdb}
+      database: ${MONGODB_DATABASE:reviewdb}
+
+sentiment:
+  service:
+    url: ${SENTIMENT_SERVICE_URL:http://localhost:8080}
+    model-name: ${SENTIMENT_MODEL_NAME:phi-sentiment}
+    timeout-seconds: ${SENTIMENT_TIMEOUT:30}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.example.reviews: INFO
